@@ -67,7 +67,7 @@ BuildButton(ByRef buttonName, ByRef buttonText, ByRef x:=50, ByRef y:=0, ByRef w
 }
 
 
-OnButton(ByRef buttonName)
+OnButton(ByRef buttonName, ByRef dr="", ByRef ext=".ahk")
 {
 	global ;gui controls must use global or static variables
 
@@ -75,7 +75,7 @@ OnButton(ByRef buttonName)
 	local OnButton, OffButton, dir, file1  
 
 	;state params below
-	dir := A_WorkingDir . "\" . buttonName . ".ahk" ;A_WorkingDir is built in variable that refers to current directory working in 
+	dir := A_WorkingDir . dr . "\" . buttonName . ext ;A_WorkingDir is built in variable that refers to current directory working in 
 	OnButton := buttonName . "On"
 	OffButton := buttonName . "Off"
 
@@ -102,7 +102,7 @@ OnButton(ByRef buttonName)
 	return 
 }
 
-Tap(ByRef buttonName)
+Tap(ByRef buttonName, ByRef dr="", ByRef ext=".ahk")
 {
 	global ;gui controls must use global or static variables
 
@@ -111,19 +111,19 @@ Tap(ByRef buttonName)
 
 	;state params below
 	DetectHiddenWindows, On 
-	dir := A_WorkingDir . "\" . buttonName . ".ahk" ;A_WorkingDir is built in variable that refers to current directory working in 
+	dir := A_WorkingDir . dr . "\" . buttonName . ext ;A_WorkingDir is built in variable that refers to current directory working in 
 	WinClose, %dir% ahk_class AutoHotkey 
 	Run, %dir% 
 
 	return 
 }
 
-OffButton(ByRef buttonName)
+OffButton(ByRef buttonName, ByRef dr="", ByRef ext=".ahk")
 {
 	global 
 	local OnButton, OffButton, dir 
 
-	dir := A_WorkingDir . "\" . buttonName . ".ahk"
+	dir := A_WorkingDir . dr . "\" . buttonName . ext 
 	OnButton := buttonName . "On"
 	OffButton := buttonName . "Off" 
 
@@ -149,7 +149,7 @@ ExitAll(params*)
 	return 
 }
 
-ExitAllArray(params*) ; first parameter is the extension, second is an array of file names without extension
+ExitAllArray(ByRef dr="", ByRef ext=".ahk", params*) ; first parameter is the extension, second is an array of file names without extension
 {
 	
 	global 
@@ -161,7 +161,7 @@ ExitAllArray(params*) ; first parameter is the extension, second is an array of 
 		for index, name in array 
 		{
 		local dir
-		dir := A_WorkingDir . "\" . name . ".ahk"
+		dir := A_WorkingDir . dr . "\" . name . ext 
 		WinClose, %dir% ahk_class AutoHotkey
 		;MsgBox, EXIT %dir%
 		 

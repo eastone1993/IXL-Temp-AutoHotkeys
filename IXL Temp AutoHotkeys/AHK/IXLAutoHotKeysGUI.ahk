@@ -2,7 +2,7 @@ SetWorkingDir, %A_ScriptDir%
 #Persistent
 #SingleInstance, force 
 #NoTrayIcon
-#Include %A_WorkingDir%\AHK\Library\GUILibrary.ahk 
+#Include %A_WorkingDir%\Library\GUILibrary.ahk 
 
 
 DetectHiddenWindows, On
@@ -19,31 +19,31 @@ return
 ;----------------------------------- MAIN SCRIPT BUTTON -------------------------------------------------------------------------------------------------------------
 AHKScriptOn:
 {
-	OnButton("AHKScript")
+	OnButton("AHKScript", "\Scripts")
 	return
 }
 
 AHKScriptOff:
 {
-	OffButton("AHKScript")
+	OffButton("AHKScript", "\Scripts")
 	return 
 }
 
 ;-----------------------------------  CUSTOM AHK SCRIPTS------------------------------------------------------------ -------------------------------------------------
 AHKEditOn:
 {
-	Tap("AHKEdit")
+	Tap("AHKEdit", "\Scripts")
 	return
 }
 
 CustomAHKViewOn:
 {
-	Tap("CustomAHKView")
+	Tap("CustomAHKView", "\Scripts")
 	return 
 }
 
 
 ;----------------------------------- GUI CLOSE -------------------------------------------------------------------------------------------------------------
 GuiClose:
-ExitAllArray(ButtonArray)
+ExitAllArray("\Scripts", ".ahk", ButtonArray)
 ExitApp 
