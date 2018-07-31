@@ -2,16 +2,20 @@ SetWorkingDir, %A_ScriptDir%
 #Persistent
 #SingleInstance, force 
 #NoTrayIcon
-#Include %A_WorkingDir%\Library\GUILibrary.ahk 
+#Include %A_ScriptDir%\Library\GUILibrary.ahk 
 
 
 DetectHiddenWindows, On
 SetTitleMatchMode, 2
 
-ButtonArray := ["AHKScript"]
+ButtonArray := ["AHKScript", "ETemplates"]
+RefArray := ["ETemplatesReferenceSheet", "HotKeyReferenceSheet"]
 TapArray := ["AHKEdit", "CustomAHKView"]
+
 BuildButtonArray(5, 15, 200, 30, 5, ButtonArray)
-BuildTapArray(5, 60, 200, 30, 5, TapArray)
+BuildTapArray(210, 15, 200, 30, 5, RefArray)
+BuildTapArray(415, 15, 200, 30, 5, TapArray)
+
 BuildGui("IXL Hot Keys", 500, 500)
 
 return 
@@ -28,8 +32,32 @@ AHKScriptOff:
 	OffButton("AHKScript", "\Scripts")
 	return 
 }
+;----------------------------------- ETEMPLATES -------------------------------------------------------------------------------------------------------------
+ETemplatesOn:
+{
+	OnButton("ETemplates", "\Scripts")
+	return
+}
 
-;-----------------------------------  CUSTOM AHK SCRIPTS------------------------------------------------------------ -------------------------------------------------
+ETemplatesOff:
+{
+	OffButton("ETemplates", "\Scripts")
+	return 
+}
+;-----------------------------------  REFERENCE SHEETS-------------------------------------------------------------------------------------------------------------
+ETemplatesReferenceSheetOn:
+{
+	Tap("ETemplatesReferenceSheet", "\Scripts")
+	return
+}
+
+HotKeyReferenceSheetOn:
+{
+	Tap("HotKeyReferenceSheet", "\Scripts")
+	return
+}
+
+;-----------------------------------  CUSTOM AHK SCRIPTS-------------------------------------------------------------------------------------------------------------
 AHKEditOn:
 {
 	Tap("AHKEdit", "\Scripts")
@@ -45,5 +73,5 @@ CustomAHKViewOn:
 
 ;----------------------------------- GUI CLOSE -------------------------------------------------------------------------------------------------------------
 GuiClose:
-ExitAllArray("\Scripts", ".ahk", ButtonArray)
+ExitAllArray("\Scripts", ".ahk", ButtonArray, RefArray, TapArray)
 ExitApp 

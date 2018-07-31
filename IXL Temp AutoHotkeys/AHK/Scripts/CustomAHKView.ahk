@@ -1,6 +1,7 @@
 ;-----------------------------------  CUSTOM AHK VIEW GUI -------------------------------------------------------------------------------------------------------------
 #Persistent
 #SingleInstance, force 
+#NoTrayIcon 
 
 Gui, Show, w1000 h500, Custom Hotkeys Reference Sheet
 Gui, Add, Text,x50 y25, Hotkey's are denoted by the asterik. 
@@ -25,7 +26,7 @@ derp(arg) { ;decides if argument should be added to custom view output
 	}
 	else 
 	{
-		FileAppend, `n%arg% , cus.txt ;add to custom view 
+		FileAppend, `n%arg% , %A_ScriptDir%\cus.txt ;add to custom view 
 	}
 }
 

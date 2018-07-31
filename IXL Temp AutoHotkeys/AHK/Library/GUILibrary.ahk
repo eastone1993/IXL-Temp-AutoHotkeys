@@ -1,5 +1,6 @@
 ;----------------------------------- LIBRARY FOR GUI BUILDING AND USAGE -------------------------------------------------------------------------------------------------------------
-
+#SingleInstance, force 
+#NoTrayIcon
 
 
 BuildTap(ByRef buttonName, ByRef buttonText, ByRef x:=50, ByRef y:=0, ByRef w:=200, ByRef h:=30)

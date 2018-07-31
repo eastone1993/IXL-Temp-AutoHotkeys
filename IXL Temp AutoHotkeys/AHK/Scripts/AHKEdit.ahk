@@ -11,6 +11,7 @@ Roster File Path: C:\Users\<USERNAME>\Desktop\Rosters
 
 #Persistent
 #SingleInstance, force
+#NoTrayIcon
 
 Gui, Show, w1000 h500, Create AutoHotkey Here 
 
@@ -50,7 +51,7 @@ BUILD:
 	}
 
 	; checks to see if hotkey already exists 
-	Loop, read, %A_ScriptDir%auxillary\testfile.ahk 
+	Loop, read, %A_ScriptDir%\auxillary\testfile.ahk 
 	{
 		If InStr(A_LoopReadLine, var1) ;checks each line of file for string
 		{
@@ -60,8 +61,8 @@ BUILD:
 	}
 
 	;creates new autohotkey 
-	FileAppend, `n::%AHKPhraseEdit%::`n, %A_ScriptDir%auxillary\testfile.ahk
-	FileAppend,(`n%AHKStringEdit%`n)`n`n, %A_ScriptDir%auxillary\testfile.ahk
+	FileAppend, `n::%AHKPhraseEdit%::`n, %A_ScriptDir%\auxillary\testfile.ahk
+	FileAppend,(`n%AHKStringEdit%`n)`n`n, %A_ScriptDir%\auxillary\testfile.ahk
 
 	MsgBox, New Hotkey Added ;confirmation
 
@@ -81,7 +82,7 @@ BUILD:
 	
 	{
 		;replaces old autohotkey with new one
-		FileRead, TheText, %A_ScriptDir%auxillary\testfile.ahk 
+		FileRead, TheText, %A_ScriptDir%\auxillary\testfile.ahk 
 		StringReplace, NewText, TheText, %var1%, %var2%, All
 
 		;rewrites file	   
@@ -89,8 +90,8 @@ BUILD:
 		FileAppend, %NewText%, %A_ScriptDir%\auxillary\testfile.ahk 
 
 		;adds new autohotkey to file
-		FileAppend,`n::%AHKPhraseEdit%::`n, %A_ScriptDir%auxillary\testfile.ahk
-		FileAppend,(`n%AHKStringEdit%`n)`n`n, %A_ScriptDir%auxillary\testfile.ahk
+		FileAppend,`n::%AHKPhraseEdit%::`n, %A_ScriptDir%\auxillary\testfile.ahk
+		FileAppend,(`n%AHKStringEdit%`n)`n`n, %A_ScriptDir%\auxillary\testfile.ahk
 
 		MsgBox, New Hotkey Added ;confirmation
 
@@ -137,7 +138,7 @@ DELETE:
 		Exit 
 	}
 	
-	Loop, read, %A_ScriptDir%auxillary\testfile.ahk 
+	Loop, read, %A_ScriptDir%\auxillary\testfile.ahk 
 	{
 		If InStr(A_LoopReadLine, var1) ;checks each line of file for string
 		{
@@ -153,7 +154,7 @@ DELETE:
 	MsgBox, 4, , Remove %AHKPhraseEdit% ?
 	IfMsgBox, Yes
 	{
-		FileRead, TheText, %A_ScriptDir%auxillary\testfile.ahk 
+		FileRead, TheText, %A_ScriptDir%\auxillary\testfile.ahk 
 		StringReplace, NewText, TheText, %var1%, %var2%, All
 
 		;rewrites file	   

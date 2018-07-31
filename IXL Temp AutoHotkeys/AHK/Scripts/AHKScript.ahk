@@ -1,6 +1,6 @@
 #SingleInstance, force 
 #Persistent
-;#NoTrayIcon
+#NoTrayIcon
 #IfWinNotExist, `%A_ScriptDir`%\auxillary\testfile.ahk 
 {
     Run, %A_ScriptDir%\auxillary\testfile.ahk
