@@ -2,6 +2,8 @@
 #SingleInstance, force 
 #NoTrayIcon
 
+wx := 0
+hx := 0
 
 BuildTap(ByRef buttonName, ByRef buttonText, ByRef x:=50, ByRef y:=0, ByRef w:=200, ByRef h:=30)
 {
@@ -58,11 +60,11 @@ BuildButton(ByRef buttonName, ByRef buttonText, ByRef x:=50, ByRef y:=0, ByRef w
 	;builds on and off button 
 	Gui, Add, Button, %xywh% %OnButton% %OnFunction%, %OnText%
 	Gui, Add, Button, %xywh% %OffButton% %OffFunction%, %OffText%
-
+	
 	;intially hides off button so on button shows 
 	GuiControl, Hide, %OffButton%
 
-	;MsgBox, %OffButton0%
+	;MsgBox, %OffButton%
 
 	return    
 }
@@ -213,6 +215,18 @@ BuildButtonArray(ByRef x, ByRef y, ByRef w, ByRef h, ByRef s, params0*)
 
 }
 
+HideButtonArray(offparams*)
+{
+	global
+	local OffButton 
+	for param in offparams
+	{
+		OffButton := buttonName . "Off"
+		GuiControl, Hide, %OffButton%
+	}
+	return 
+}
+
 BuildTapArray(ByRef x, Byref y, ByRef w, ByRef h, ByRef s, params1*)
 {
 	global 
@@ -281,11 +295,9 @@ BuildGui(ByRef GuiName, ByRef x, ByRef y)
 		width := TAwidth
 	}
 
-	if wx is number 
-	{
-		width := width + wx 
-		height := height + hx
-	}
+	width := width + wx 
+	height := height + hx
+	
  
 
 	gname := GuiName
@@ -301,8 +313,8 @@ BuildGui(ByRef GuiName, ByRef x, ByRef y)
 AddGuiDimension(ByRef wid, ByRef het)
 {
 	global 
-	wx := wid 
-	hx := het 
+	wx := wx + wid 
+	hx := hx + het 
 
 	return 
 }
