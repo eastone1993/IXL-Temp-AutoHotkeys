@@ -1,12 +1,8 @@
 
-::derp_rem::
+::xample::
 (
-FgfHGGh
-)
+This is an xample autohotkey. You can delete this if you want by going to the AHKEdit and entering the hotkey name "xample" and then hitting delete. It will no longer be in use. 
 
-
-::balh_rem::
-(
-ba['h'NG'nkgg
+Let me know if there's anything you need!
 )
 

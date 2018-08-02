@@ -9,19 +9,18 @@ SetTitleMatchMode, 2
 
 ButtonArray := ["AHKScript", "ETemplates"]
 RefArray := ["ETemplatesReferenceSheet", "HotKeyReferenceSheet"]
-TapArray := ["AHKEdit", "CustomAHKView"]
+TapArray := ["AHKEdit", "CustomAHKView", "Reload"]
 
 BuildButtonArray(5, 15, 200, 30, 5, ButtonArray)
-GuiControl, Hide, AHKScriptOff
-GuiControl, Hide, ETemplatesOff  
-
 BuildTapArray(210, 15, 200, 30, 5, RefArray)
 BuildTapArray(415, 15, 200, 30, 5, TapArray)
 
+Gui, Add, Radio, x25 y95 vRadioOn gTOP_ON, AHK window always displayed
+Gui, Add, Radio, x225 y95 Checked vRadioOff gTOP_OFF, AHK window not always displayed 
+AddGuiDimension(0,5)
 
-Gui, Add, Radio, x25 y100 vRadioOn gTOP_ON, AHK window always displayed
-Gui, Add, Radio, x225 y100 Checked vRadioOff gTOP_OFF, AHK window not always displayed 
-AddGuiDimension(0,50)
+
+
 
 BuildGui("IXL Hot Keys", 500, 500)
 
@@ -86,6 +85,14 @@ TOP_ON:
 TOP_OFF:
 {
 	WinSet, AlwaysOnTop, Off 
+	return 
+}
+
+;----------------------------------- RELOAD -------------------------------------------------------------------------------------------------------------
+ReloadOn:
+{
+	ExitAllArray("\Scripts", ".ahk", ButtonArray, RefArray, TapArray)
+	Reload 
 	return 
 }
 ;----------------------------------- GUI CLOSE -------------------------------------------------------------------------------------------------------------
