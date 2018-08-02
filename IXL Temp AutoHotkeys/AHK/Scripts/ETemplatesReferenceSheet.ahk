@@ -3,42 +3,30 @@
 #Persistent
 #SingleInstance, force 
 #NoTrayIcon
+#Include %A_WorkingDir%\Library\scrollbar.ahk
 
-Gui, +Resize
+OnMessage(0x115, "OnScroll") ; WM_VSCROLL
+OnMessage(0x114, "OnScroll") ; WM_HSCROLL
+
+Gui, +Resize +0x300000
 Gui, Show, w1250 h756, E-mail Template Reference Sheet 
 Gui, Add, Picture, x0 y0 w1250 h756, %A_WorkingDir%\images\ref.png
+GroupAdd, MyGui, % "ahk_id " . WinExist()
 return 
 
 GuiClose:
 ExitApp
-
-
-
-/*
-#Persistent
-#SingleInstance, force 
-;#NoTrayIcon
-;#Include %A_Desktop%\anchor.ahk 
-Gui, +Resize
-Gui, Show, w1250 h756, E-mail Template Reference Sheet 
-
-WinGetPos, , , GuiWidth, GuiHeight, E-mail Template Reference Sheet 
-
-GW := " w" . GuiWidth
-GH := " h" . GuiHeight
-Gui, Add, Picture, x0 y0 %GW% %GH%, %A_WorkingDir%\images\ref.png
-;MsgBox % GW 
-;MsgBox % GH 
-return 
 
 GuiSize:
-WinGetPos, , , GuiWidth, GuiHeight, E-mail Template Reference Sheet 
-GW := " w" . GuiWidth
-GH := " h" . GuiHeight
-Gui, Add, Picture, x0 y0 %GW% %GH%, %A_WorkingDir%\images\ref.png
-Gui, Show, %GW% %GH%, E-mail Template Reference Sheet 
-return 
+    UpdateScrollBars(A_Gui, A_GuiWidth, A_GuiHeight)
+return
 
-GuiClose:
-ExitApp
-*/
+#IfWinActive ahk_group MyGui
+WheelUp::
+WheelDown::
++WheelUp::
++WheelDown::
+    ; SB_LINEDOWN=1, SB_LINEUP=0, WM_HSCROLL=0x114, WM_VSCROLL=0x115
+    OnScroll(InStr(A_ThisHotkey,"Down") ? 1 : 0, 0, GetKeyState("Shift") ? 0x114 : 0x115, WinExist())
+return
+
