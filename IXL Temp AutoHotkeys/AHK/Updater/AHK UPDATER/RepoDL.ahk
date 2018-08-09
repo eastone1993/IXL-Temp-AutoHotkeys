@@ -16,7 +16,7 @@ SetWorkingDir, %A_ScriptDir%\updates   ;sets directory to download file
 
 UrlDownloadToFile, %FileURL%, %filename%        ;downloads file with designated name 
 
-MsgBox Download finished! 
+;MsgBox Download finished! 
 
 ;----------------------------------- UNZIP SECTION -------------------------------------------------------------------------------------------------------------
 
